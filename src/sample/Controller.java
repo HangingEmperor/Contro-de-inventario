@@ -52,7 +52,7 @@ public class Controller {
             }
         });
 
-        Button consult = new Button("Edit");
+        Button consult = new Button("consult");
         consult.setId("" + (productos.size() - 1));
         consult.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -63,7 +63,7 @@ public class Controller {
             }
         });
 
-        Button remove = new Button("Edit");
+        Button remove = new Button("remove");
         remove.setId("" + (productos.size() - 1));
         remove.setOnAction(new EventHandler<ActionEvent>() {
             @Override
