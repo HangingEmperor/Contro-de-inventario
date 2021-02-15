@@ -27,16 +27,19 @@ public class Controller {
     private TextField editDescription;
     @FXML
     private TextField editProductName;
+    @FXML
+    private TextField consultID;
+    @FXML
+    private TextField consultDescription;
+    @FXML
+    private TextField consultName;
 
     @FXML
     void addProduct(ActionEvent event) {
-        productos.add(new Producto("" + productos.size() ,inputProductName.getText(), inputDescription.getText()));
+        productos.add(new Producto("" + productos.size() ,inputProductName.getText(), inputDescription.getText(), row));
+
         gridPane.add(new Label("" + productos.size()), column, row);
-        column++;
-
-
-        gridPane.add(new Label(inputProductName.getText()), column, row);
-        column++;
+        gridPane.add(new Label(inputProductName.getText()), column + 1, row);
 
         Button edit = new Button("Edit");
         edit.setId("" + (productos.size() - 1));
@@ -49,7 +52,30 @@ public class Controller {
             }
         });
 
-        gridPane.add(edit, column, row);
+        Button consult = new Button("Edit");
+        consult.setId("" + (productos.size() - 1));
+        consult.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                consultName.setText(productos.get(Integer.parseInt(consult.getId())).getName());
+                consultDescription.setText(productos.get(Integer.parseInt(consult.getId())).getDescription());
+                outputID.setText(consult.getId());
+            }
+        });
+
+        Button remove = new Button("Edit");
+        remove.setId("" + (productos.size() - 1));
+        remove.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                productos.remove(Integer.parseInt(remove.getId()));
+                gridPane.getChildren().remove(productos.get(Integer.parseInt(outputID.getText())).getRow() -1);
+            }
+        });
+
+        gridPane.add(edit, column + 2, row);
+        gridPane.add(consult, column + 3, row);
+        gridPane.add(remove, column + 4, row);
         column = 0;
         row++;
     }
@@ -58,5 +84,7 @@ public class Controller {
     void edit(ActionEvent event) {
         productos.get(Integer.parseInt(outputID.getText())).setName(editProductName.getText());
         productos.get(Integer.parseInt(outputID.getText())).setDescription(editDescription.getText());
+        System.out.println(gridPane.getChildren().get(1));
+        gridPane.add(new Label(editProductName.getText()), 1, productos.get(Integer.parseInt(outputID.getText())).getRow());
     }
 }

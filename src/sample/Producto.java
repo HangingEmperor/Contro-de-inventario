@@ -5,11 +5,27 @@ public class Producto {
     private String id;
     private String name;
     private String description;
+    private int row;
 
     public Producto(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public Producto(String id, String name, String description, int row) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.row = row;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
     }
 
     public String getId() {
